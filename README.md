@@ -22,8 +22,13 @@ The `ros_gz_bridge` acts as the vital communication layer, translating messages 
 ---
 
 ###  Potential Field Navigation Algorithm
-#### 1 The Mathematical Model
-The navigation logic is based on an Artificial Potential Field (APF), where the robot moves according to the resultant vector of attractive and repulsive forces.
+
+<p align="center">
+  <img src="https://github.com/Salma-Talat-Shaheen/ROS_2_Final_Project_Maze_Navigation_using_Potential_Field_Method/blob/main/assets/simple_maze.png?raw=true" width="500" />
+</p>
+
+#### 1. The Mathematical Model
+The navigation logic is based on an  Potential Field Methods (PFM), where the robot moves according to the resultant vector of attractive and repulsive forces.
 
 * **Attractive Force ($F_{att}$):** Generates a pull toward the goal coordinates.
     $$F_{att} = k_{att} \times (P_{goal} - P_{robot})$$
@@ -31,12 +36,16 @@ The navigation logic is based on an Artificial Potential Field (APF), where the 
     $$F_{rep} = k_{rep} \times \left(\frac{1}{d} - \frac{1}{d_{obs}}\right) \times \frac{1}{d^2}$$
     *(Where $d$ is the current distance to an obstacle and $d_{obs}$ is the influence threshold).*
 
-#### 2 Handling LiDAR Data
+#### 2. Handling LiDAR Data
 To ensure numerical stability and prevent system crashes, a robust filtering pipeline was implemented:
 * **Zeros & NaNs:** Automatically discarded to avoid division-by-zero errors in the force calculations.
 * **Infs:** Treated as the maximum sensor range (5.0m), representing clear paths for navigation.
 
-#### 3 Escape Strategy (Local Minima)
+#### 3. Escape Strategy (Local Minima)
+
+<p align="center">
+  <img src="https://github.com/Salma-Talat-Shaheen/ROS_2_Final_Project_Maze_Navigation_using_Potential_Field_Method/blob/main/assets/complex_maze.png?raw=true" width="500" />
+</p>
 In the **Complex Maze**, standard APF often gets stuck in U-shaped traps. We implemented **Virtual Charges**:
 * The robot maintains a `path_history` of its previous coordinates.
 * When a stall is detected, these coordinates act as temporary "repulsive charges," pushing the robot out of dead-ends and forcing it to explore new paths toward the goal.
