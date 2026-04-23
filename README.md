@@ -38,6 +38,10 @@ The `ros_gz_bridge` acts as the vital communication layer, translating messages 
 #### 1. The Mathematical Model
 The navigation logic is based on an  Potential Field Methods (PFM), where the robot moves according to the resultant vector of attractive and repulsive forces.
 
+<p align="center">
+  <img src="https://github.com/Salma-Talat-Shaheen/ROS_2_Final_Project_Maze_Navigation_using_Potential_Field_Method/blob/main/assets/Force.png?raw=true" width="500" />
+</p>
+
 * **Attractive Force ($F_{att}$):** Generates a pull toward the goal coordinates.
     $$F_{att} = k_{att} \times (P_{goal} - P_{robot})$$
 * **Repulsive Force ($F_{rep}$):** Generates a push away from obstacles detected by LiDAR.
