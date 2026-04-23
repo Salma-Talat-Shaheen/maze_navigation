@@ -78,14 +78,12 @@ To establish a functional development environment for the **TurtleBot4**, we uti
 #### Setup Reference
 ```bash
 # Clone the necessary repositories
-
 cd ~/ros2_project_ws/src
 git clone -b jazzy [https://github.com/turtlebot/turtlebot4.git](https://github.com/turtlebot/turtlebot4.git)
 git clone -b jazzy [https://github.com/turtlebot/turtlebot4_simulator.git](https://github.com/turtlebot/turtlebot4_simulator.git)
 git clone -b jazzy [https://github.com/turtlebot/turtlebot4_desktop.git](https://github.com/turtlebot/turtlebot4_desktop.git)
 
 # Resolve dependencies
-
 cd ~/ros2_project_ws
 rosdep update
 rosdep install -i --from-path src --rosdistro jazzy -y
