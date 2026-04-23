@@ -5,7 +5,19 @@
 </p>
 
 ---
+This project focuses on developing an advanced autonomous navigation algorithm using the  **Potential Field Methods (PFM)** . The robot autonomously navigates by balancing attractive forces toward a goal and repulsive forces to avoid obstacles in real-time. This approach ensures smooth, safe, and efficient movement, maintaining high Real-time Performance within complex environments.
 
+### Test Environments
+The algorithm was rigorously tested across two distinct environments to evaluate its navigation efficiency:
+
+1. Simple Maze: An introductory testing environment featuring open paths and distinct obstacles to evaluate the stability and baseline performance of the algorithm.
+<p align="center">
+  <img src="https://github.com/Salma-Talat-Shaheen/ROS_2_Final_Project_Maze_Navigation_using_Potential_Field_Method/blob/main/assets/simple_maze.png?raw=true" width="400" />
+</p>
+2. Complex Maze: An advanced, high-density environment featuring narrow corridors and interlocking obstacles. This environment tests the algorithm's capability to handle Local Minima and determine optimal paths under challenging conditions.
+<p align="center">
+  <img src="https://github.com/Salma-Talat-Shaheen/ROS_2_Final_Project_Maze_Navigation_using_Potential_Field_Method/blob/main/assets/complex_maze.png?raw=true" width="400" />
+</p>
 ###  System Configuration (ros_gz_bridge)
 The `ros_gz_bridge` acts as the vital communication layer, translating messages between the Gazebo transport layer and the ROS 2 DDS middleware.
 
@@ -23,10 +35,6 @@ The `ros_gz_bridge` acts as the vital communication layer, translating messages 
 
 ###  Potential Field Navigation Algorithm
 
-<p align="center">
-  <img src="https://github.com/Salma-Talat-Shaheen/ROS_2_Final_Project_Maze_Navigation_using_Potential_Field_Method/blob/main/assets/simple_maze.png?raw=true" width="500" />
-</p>
-
 #### 1. The Mathematical Model
 The navigation logic is based on an  Potential Field Methods (PFM), where the robot moves according to the resultant vector of attractive and repulsive forces.
 
@@ -43,9 +51,6 @@ To ensure numerical stability and prevent system crashes, a robust filtering pip
 
 #### 3. Escape Strategy (Local Minima)
 
-<p align="center">
-  <img src="https://github.com/Salma-Talat-Shaheen/ROS_2_Final_Project_Maze_Navigation_using_Potential_Field_Method/blob/main/assets/complex_maze.png?raw=true" width="500" />
-</p>
 In the **Complex Maze**, standard APF often gets stuck in U-shaped traps. We implemented **Virtual Charges**:
 * The robot maintains a `path_history` of its previous coordinates.
 * When a stall is detected, these coordinates act as temporary "repulsive charges," pushing the robot out of dead-ends and forcing it to explore new paths toward the goal.
