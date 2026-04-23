@@ -18,6 +18,7 @@ The algorithm was rigorously tested across two distinct environments to evaluate
 <p align="center">
   <img src="https://github.com/Salma-Talat-Shaheen/ROS_2_Final_Project_Maze_Navigation_using_Potential_Field_Method/blob/main/assets/complex_maze.png?raw=true" width="400" />
 </p>
+
 ###  System Configuration (ros_gz_bridge)
 The `ros_gz_bridge` acts as the vital communication layer, translating messages between the Gazebo transport layer and the ROS 2 DDS middleware.
 
@@ -69,7 +70,7 @@ After multiple iterations in the Gazebo environment, we settled on the following
 | Goal Tolerance | $d_{goal}$ | 0.2 m | 0.2 m | Defines the arrival radius for a successful stop |
 
 ---
-### 1.3 Package Installation
+### Package Installation
 
 To establish a functional development environment for the **TurtleBot4**, we utilized the following workflow:
 
