@@ -111,7 +111,7 @@ ros2 launch maze_navigation_finalProject_1 maze_sim.launch.py world:=simple_maze
 # Terminal 2: Run Planner
 source /opt/ros/jazzy/setup.bash
 source install/setup.bash
-ros2 run maze_navigation_finalProject_1 hybrid_planner --ros-args -p goal_x:=9.0 -p goal_y:=9.0
+ros2 run maze_navigation_finalProject_1 hybrid_planner --ros-args -p maze_type:=simple
 ```
 
 #### Step 3.2: Launch Complex Maze
@@ -123,7 +123,7 @@ ros2 launch maze_navigation_finalProject_1 maze_sim.launch.py world:=complex_maz
 # Terminal 2: Run Planner
 source /opt/ros/jazzy/setup.bash
 source install/setup.bash
-ros2 run maze_navigation_finalProject_1 hybrid_planner --ros-args -p goal_x:=11.4 -p goal_y:=11.4
+ros2 run maze_navigation_finalProject_1 hybrid_planner --ros-args -p maze_type:=complex
 ```
 
 **Future work** will focus on integrating **SLAM (Simultaneous Localization and Mapping)** for dynamic map generation and extending the navigation capabilities to include multi-robot coordination. Furthermore, we aim to deploy the developed algorithm onto physical TurtleBot 4 hardware to validate its real-world navigation performance and robustness. 
