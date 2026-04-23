@@ -10,11 +10,14 @@ This project focuses on developing an advanced autonomous navigation algorithm u
 ### Test Environments
 The algorithm was rigorously tested across two distinct environments to evaluate its navigation efficiency:
 
-1. Simple Maze: An introductory testing environment featuring open paths and distinct obstacles to evaluate the stability and baseline performance of the algorithm.
+1. Simple Maze
+An introductory testing environment featuring open paths and distinct obstacles to evaluate the stability and baseline performance of the algorithm.
 <p align="center">
   <img src="https://github.com/Salma-Talat-Shaheen/ROS_2_Final_Project_Maze_Navigation_using_Potential_Field_Method/blob/main/assets/simple_maze.png?raw=true" width="400" />
 </p>
-2. Complex Maze: An advanced, high-density environment featuring narrow corridors and interlocking obstacles. This environment tests the algorithm's capability to handle Local Minima and determine optimal paths under challenging conditions.
+
+2. Complex Maze
+An advanced, high-density environment featuring narrow corridors and interlocking obstacles. This environment tests the algorithm's capability to handle Local Minima and determine optimal paths under challenging conditions.
 <p align="center">
   <img src="https://github.com/Salma-Talat-Shaheen/ROS_2_Final_Project_Maze_Navigation_using_Potential_Field_Method/blob/main/assets/complex_maze.png?raw=true" width="400" />
 </p>
@@ -28,10 +31,6 @@ The `ros_gz_bridge` acts as the vital communication layer, translating messages 
 | `/odom` | `gz.msgs.Odometry` | `nav_msgs/Odometry` | GZ → ROS 2 |
 | `/cmd_vel` | `gz.msgs.Twist` | `geometry_msgs/Twist` | ROS 2 → GZ |
 
-**Issues Resolved:**
-1. **Sensor Activation:** Modified `simple_maze.world` to include the `gz::sim::systems::Sensors` plugin, which was missing in the skeleton, ensuring LiDAR data generation.
-2. **Namespace Mapping:** Implemented remapping logic to bridge the robot's hardware interface with our custom planner node effectively.
-
 ---
 
 ###  Potential Field Navigation Algorithm
@@ -43,7 +42,6 @@ The navigation logic is based on an  Potential Field Methods (PFM), where the ro
     $$F_{att} = k_{att} \times (P_{goal} - P_{robot})$$
 * **Repulsive Force ($F_{rep}$):** Generates a push away from obstacles detected by LiDAR.
     $$F_{rep} = k_{rep} \times \left(\frac{1}{d} - \frac{1}{d_{obs}}\right) \times \frac{1}{d^2}$$
-    *(Where $d$ is the current distance to an obstacle and $d_{obs}$ is the influence threshold).*
 
 #### 2. Handling LiDAR Data
 To ensure numerical stability and prevent system crashes, a robust filtering pipeline was implemented:
