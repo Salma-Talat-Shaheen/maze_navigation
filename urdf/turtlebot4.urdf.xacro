@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<robot name="turtlebot4" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find irobot_create_description)/urdf/create3.urdf.xacro" />
+  <xacro:include filename="$(find turtlebot4_description)/urdf/sensors/oakd.urdf.xacro" />
+  <xacro:include filename="$(find turtlebot4_description)/urdf/standard/tower_standoff.urdf.xacro" />
+
+  <link name="rplidar_link">
+    <visual>
+      <geometry><cylinder radius="0.035" length="0.02"/></geometry>
+      <material name="black"><color rgba="0 0 0 1"/></material>
+    </visual>
+    <collision>
+      <geometry><cylinder radius="0.035" length="0.02"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="rplidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="rplidar_link"/>
+    <origin xyz="0 0 0.2" rpy="0 0 0"/> 
+  </joint>
+
+  <gazebo>
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.233</wheel_separation>
+      <wheel_radius>0.035</wheel_radius>
+      <max_linear_acceleration>1.0</max_linear_acceleration>
+      <min_linear_acceleration>-1.0</min_linear_acceleration>
+      <max_angular_acceleration>2.0</max_angular_acceleration>
+      <min_angular_acceleration>-2.0</min_angular_acceleration>
+      <topic>/model/turtlebot4/cmd_vel</topic>
+      <odom_topic>/model/turtlebot4/odometry</odom_topic>
+      <tf_topic>/model/turtlebot4/tf</tf_topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+    </plugin>
+
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+      <topic>/model/turtlebot4/joint_states</topic>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="rplidar_link">
+    <sensor name="rplidar" type="gpu_lidar">
+      <pose>0 0 0 0 0 0</pose>
+      <update_rate>10</update_rate>
+      <visualize>true</visualize>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.15</min>
+          <max>12.0</max>
+          <resolution>0.01</resolution>
+        </range>
+      </lidar>
+      <topic>/model/turtlebot4/scan</topic> 
+      <gz_frame_id>rplidar_link</gz_frame_id>
+    </sensor>
+  </gazebo>
+
+</robot>
