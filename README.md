@@ -68,17 +68,6 @@ After multiple iterations in the Gazebo environment, we settled on the following
 | Goal Tolerance | $d_{goal}$ | 0.2 m | 0.2 m | Defines the arrival radius for a successful stop |
 
 ---
-### Package Installation
-
-To establish a functional development environment for the **TurtleBot4**, we utilized the following workflow:
-
-* **Repository Cloning:** We cloned the official TurtleBot4 repositories (core, simulator, and desktop utilities) directly into the `ros2_project_ws/src` directory, specifically targeting the **jazzy** branch.
-* **Dependency Resolution:** By executing `rosdep`, we ensured that all system-level dependencies (such as Navigation2 and Gazebo bridge libraries) were correctly identified and installed.
-* **Efficient Compilation:** The workspace was built using `colcon build --symlink-install`. This flag is a development best practice, as it creates symbolic links instead of copying files, allowing our Python-based **Potential Field Planner** scripts to reflect changes immediately without requiring a full re-compilation.
-
-
-
----
 #### Setup Reference
 ```bash
 # Clone the necessary repositories
@@ -133,4 +122,6 @@ source install/setup.bash
 ros2 run maze_navigation_finalProject_1 hybrid_planner --ros-args -p goal_x:=11.4 -p goal_y:=11.4
 ```
 
+---
+Future work will focus on integrating **SLAM (Simultaneous Localization and Mapping)** for dynamic map generation and extending the navigation capabilities to include multi-robot coordination. Furthermore, we aim to deploy the developed algorithm onto physical TurtleBot 4 hardware to validate its real-world navigation performance and robustness. 
 ---
