@@ -114,6 +114,7 @@ source ~/ros2_project_ws/install/setup.bash
 ros2 run maze_navigation potential_field_planner --ros-args -p maze_type:=simple -p goal_x:=9.0 -p goal_y:=9.0```
 
 #### Step 3.2: Launch Complex Maze
+
 ```bash
 # Terminal 1: Launch Sim
 source /opt/ros/jazzy/setup.bash
