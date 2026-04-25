@@ -9,17 +9,17 @@ import xacro
 def generate_launch_description():
     pkg_maze_navigation = get_package_share_directory('maze_navigation')
     
-    # 1. تحديد ملف العالم (المسار المباشر لضمان العمل في WSL)
+    # 1. Define the path to the world file (Direct path for WSL compatibility)
     world_file = '/home/shahd/ros2_project_ws/src/maze_navigation/worlds/complex_maze.world'
     
-    # 2. تشغيل Gazebo
+    # 2. Include the Gazebo simulation launch file
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')]),
         launch_arguments={'gz_args': f'-r {world_file}'}.items(),
     )
 
-    # 3. معالجة ملف Xacro (نفس ملف الروبوت)
+    # 3. Process the Xacro file and initialize robot_state_publisher
     xacro_file = os.path.join(pkg_maze_navigation, 'urdf', 'turtlebot4.urdf.xacro')
     robot_description_config = xacro.process_file(xacro_file)
     robot_description_content = robot_description_config.toxml()
@@ -32,7 +32,7 @@ def generate_launch_description():
         parameters=[{'robot_description': robot_description_content, 'use_sim_time': True}]
     )
 
-    # 4. إحضار الروبوت (Spawn) عند إحداثيات (1.0, 1.0) لتكون داخل المتاهة المعقدة
+    # 4. Spawn the robot at (1.0, 1.0) to start inside the complex maze
     spawn_robot = Node(
         package='ros_gz_sim',
         executable='create',
@@ -44,7 +44,7 @@ def generate_launch_description():
         output='screen',
     )
 
-    # 5. الجسر (Bridge) باستخدام ملف الإعدادات الخاص بك
+    # 5. Configure the parameter_bridge using the project-specific configuration file
     bridge_config = os.path.join(pkg_maze_navigation, 'parameters', 'bridge_parameters.yaml')
     
     parameter_bridge = Node(
@@ -54,6 +54,7 @@ def generate_launch_description():
         output='screen',
     )
 
+    # Return the full launch description
     return LaunchDescription([
         gazebo,
         robot_state_publisher,
